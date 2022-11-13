@@ -120,4 +120,68 @@ window.addEventListener("DOMContentLoaded", () => {
       hideModalWindow();
     }
   });
+
+//class coponent - constructor function
+
+class DietMenu{
+    constructor(src,alt,title,descripton,cost,parentSelector){
+      this.src = src;
+      this.alt = alt;
+      this.title = title;
+      this.descripton = descripton;
+      this.cost = cost;
+      this.parentSelector = document.querySelector(parentSelector);
+      this.rate = 42;
+      this.changeCurrency();
+    }
+    
+    changeCurrency(){
+      this.cost = this.cost*this.rate;
+    }
+
+    render(){
+      const element = document.createElement('div');
+      element.innerHTML = `
+              <div class="menu__item">
+                  <img src=${this.src} alt=${this.alt}>
+                  <h3 class="menu__item-subtitle">${this.title}</h3>
+                  <div class="menu__item-descr">${this.descripton}</div>
+                  <div class="menu__item-divider"></div>
+                  <div class="menu__item-price">
+                      <div class="menu__item-cost">Price:</div>
+                      <div class="menu__item-total"><span>${this.cost}</span> UAH/day</div>
+                  </div>
+              </div>
+      `;
+      this.parentSelector.append(element);
+   }
+}
+
+new DietMenu(
+    "img/tabs/vegy.jpg",
+    "vegy",
+    'Menu "Fitness"',
+    'Menu "Fitness"- is a new approach to cooking: more fresh vegetables and fruits. Product of active and healthy people. It is a brand new product with optimal price and high quality!',
+    9,
+    '.menu .container'
+    ).render();
+  
+new DietMenu(
+      "img/tabs/elite.jpg",
+      "elite",
+      'Menu "Premium"',
+      'Menu "Premium"- We use not only beautiful packaging design, but also quality dishes. Red fish, seafood, fruit - restaurant menu without going to the restaurant',
+      15,
+      '.menu .container'
+      ).render();
+
+new DietMenu(
+        "img/tabs/post.jpg",
+        "fasting",
+        'Menu "Fasting"',
+        'Menu "Fasting"- It is a careful selection of ingredients: complete absence of animal products, milk from almonds, oats, coconut or buckwheat, the right amount of protein due to tofu and imported vegetarian steaks',
+        17,
+        '.menu .container'
+        ).render();
+
 });
